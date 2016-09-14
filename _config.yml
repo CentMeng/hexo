@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 孟少杰博客
-subtitle:
-description:
-author: Vincent.M
+title: 萤火
+subtitle: 
+description: 远方除了遥远一无所有
+author: Vicent.M
 language: zh-Hans
-email: csdn@vip.163.com
+email: mengshaojie@188.com
 timezone:
 
 # URL
@@ -49,6 +49,14 @@ default_category: uncategorized
 category_map:
 tag_map:
 
+# Archives 默认值为2，这里都修改为1，相应页面就只会列出标题，而非全文
+## 2: Enable pagination
+## 1: Disable pagination
+## 0: Fully Disable
+archive: 1
+category: 1
+tag: 1
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
@@ -58,7 +66,7 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 10
+per_page: 5
 pagination_dir: page
 
 # Extensions
