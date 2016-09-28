@@ -9,8 +9,7 @@ tags:
 
 相信很多人，在开发时候会遇到https检验证书问题，证书不对，无法调取接口。其实解决这个方法很简单，只需要写如下类：
 
-```
-
+```java
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -85,15 +84,12 @@ public class FakeX509TrustManager implements X509TrustManager {
 
         HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
     }
-
 }
-
 ```
 
 然后在请求接口前加allowAllSSL()方法
 
-```
+```java
   FakeX509TrustManager.allowAllSSL();
-
 ```
 

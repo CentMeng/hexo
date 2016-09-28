@@ -11,7 +11,7 @@ tags:
 
 首先我们使用的html，解析成Spanned，然后设置Span来实现图文混排的，代码如下：
 
-```
+```java
 
     public static Drawable getUrlDrawable(String source,  TextView mTextView) {
         GlideImageGetter imageGetter = new GlideImageGetter(mTextView.getContext(),mTextView);
@@ -69,7 +69,7 @@ tags:
 
 方法调用就是
 
-```
+```java
   ImageTextUtil.setImageText(tv,html);
 ```
 

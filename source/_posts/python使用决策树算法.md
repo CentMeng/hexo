@@ -24,7 +24,7 @@ tags:
 	
 	输入数据转化如下
 	
-	```
+	```python
 	dummyX[[ 0.  0.  1.  0.  1.  1.  0.  0.  1.  0.]
 		   [ 0.  0.  1.  1.  0.  1.  0.  0.  1.  0.]
  		   [ 1.  0.  0.  0.  1.  1.  0.  0.  1.  0.]
@@ -46,7 +46,7 @@ tags:
 	
 	输出数据转化如下
 	
-	```
+	```python
 	dummY[[0]
  		  [0]
  		  [1]
@@ -66,13 +66,13 @@ tags:
 	
 4. 建模
 
-	```
+	```python
 	 clf = tree.DecisionTreeClassifier(criterion='entropy') #声明使用决策树ID3算法
  clf = clf.fit(dummyX,dummyY);
 	```
 5. 生成dot文件
    
-   ```
+   ```python
    with open("allEletronicInformationGainOri.dot", 'w') as f:
     f = tree.export_graphviz(clf,feature_names=vec.get_feature_names(),out_file=f)
    ```
@@ -80,7 +80,7 @@ tags:
 
 7. 测试和使用
 
-	```
+	```python
 #newRowX是0，1输入数据
 predictedY = clf.predict(newRowX)
 print("新数据结果" + str(predictedY))

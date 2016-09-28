@@ -16,13 +16,13 @@ tags:
 其实很简单，只需要借助android的[Design Support Library](https://guides.codepath.com/android/Design-Support-Library)
 
 ####1.引用library
-```
+```java
  compile 'com.android.support:design:23.3.0'
  ```
  
  ####2.写布局
  
- ```
+ ```xml
   <android.support.design.widget.CoordinatorLayout
             android:id="@+id/coordinator"
             android:layout_marginTop="@dimen/view_height"
@@ -113,7 +113,7 @@ app:layout_scrollFlags属性里面必须至少启用scroll这个flag，这样这
 
 代码很简单，直接看代码
 
-```
+```java
 
 public class ExpertDetailPagerAdapter extends FragmentPagerAdapter {
 
@@ -161,7 +161,7 @@ getPageTitle是返回Tab的标题
 
 ####2.设置Tablayout
 
-```
+```java
  fragmentAdapter = new ExpertDetailPagerAdapter(getSupportFragmentManager(),expertId);
   viewpager.setAdapter(fragmentAdapter);
   viewpager.setOffscreenPageLimit(3);
@@ -173,7 +173,7 @@ getPageTitle是返回Tab的标题
 
 本例中Tablayout是居中显示，是通过在布局中设置这两个属性实现的
 
-```
+```html
 
 	app:tabGravity="center"
 	app:tabMode="fixed"
@@ -192,7 +192,7 @@ CoordinatorLayout的工作原理是搜索定义了[CoordinatorLayout Behavior](h
 
 要自己定义CoordinatorLayout Behavior，你需要实现layoutDependsOn() 和onDependentViewChanged()两个方法。比如AppBarLayout.Behavior 就定义了这两个关键方法。这个behavior用于当滚动发生的时候让AppBarLayout发生改变。
 
-```
+```java
 
 public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
     return dependency instanceof AppBarLayout;
