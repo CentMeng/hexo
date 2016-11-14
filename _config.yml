@@ -81,3 +81,7 @@ deploy:
   repo: https://github.com/CentMeng/CentMeng.github.io.git
   branch: master 
 
+duoshuo_shortname: CentMeng
+
+
+
