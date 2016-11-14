@@ -6,7 +6,7 @@
 title: 萤火
 subtitle: 
 description: 远方除了遥远一无所有
-author: Vicent.M
+author: Vincent.M
 language: zh-Hans
 email: mengshaojie@188.com
 timezone:
@@ -72,7 +72,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

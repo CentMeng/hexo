@@ -2,9 +2,9 @@
 title: spring-boot 分页查询（关联表）
 date: 2016-08-08 22:27:42
 categories:
-- spring-boot
+- 后端技术
 tags:
-- java开发
+- spring-boot
 ---
 <img src="/img/java.jpg" />
 

@@ -2,7 +2,7 @@
 title: weChat小程序开发工具和破解
 date: 2016-09-23 08:45:23
 categories:
-- Wechat小程序
+- 前端技术
 tags:
 - 工具
 ---

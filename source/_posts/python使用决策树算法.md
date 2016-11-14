@@ -2,9 +2,9 @@
 title: python使用决策树算法
 date: 2016-07-19 23:16:52
 categories:
-- python
+- 大数据技术
 tags:
-- 大数据
+- python
 ---
 
 <img src="/img/data.jpg" />

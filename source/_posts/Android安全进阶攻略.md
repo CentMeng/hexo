@@ -2,7 +2,7 @@
 title: Android安全进阶攻略
 date: 2016-09-20 11:02:18
 categories:
-- 进阶
+- Android技术
 tags:
 - android安全
 ---

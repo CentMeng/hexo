@@ -2,7 +2,7 @@
 title: hexo安装
 date: 2016-07-19 19:29:53
 categories:
-- hexo
+- 其他
 tags:
 - hexo
 ---
