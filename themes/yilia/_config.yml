@@ -1,10 +1,12 @@
 # Header
 menu:
   主页: /
+  随笔集: /categories/随笔集
   大数据: /categories/大数据技术
   Android: /categories/Android技术
   前端: /categories/前端技术
   后端: /categories/后端技术
+  数据库: /categories/数据库
   进阶: /categories/进阶
   其他: /categories/其他
 
@@ -69,3 +71,15 @@ friends:
  
 
 aboutme: 很惭愧<br><br>只做了一点微小的工作<br>谢谢大家
+
+# 打赏
+# 请在需要打赏的文章的md文件头部，设置属性reward: true
+
+# 打赏基础设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
+reward_type: 2
+# 打赏wording
+reward_wording: '谢谢您请我吃糖果'
+# 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
+alipay: http://obbbnmuwc.bkt.clouddn.com/zhifubao.png
+# 微信二维码图片地址
+weixin: http://obbbnmuwc.bkt.clouddn.com/weixin.png
