@@ -2,7 +2,7 @@
 title: spring-boot项目部署到Tomcat上
 date: 2017-01-07 14:45:46
 categories:
-- 后端
+- 后端技术
 tags:
 - spring-boot
 ---

@@ -3,7 +3,7 @@ reward: true
 title: Java架构师-并发编程
 date: 2017-03-19 20:17:58
 categories:
-- 后端
+- 后端技术
 tags:
 - Java架构师
 ---
@@ -19,11 +19,11 @@ tags:
 #### 脏读
 - 在我们对一个对象的方法加锁的时候，需要考虑业务的整体性，即为setValue/getValue方法同时加载synchronized同步关键字，保证业务(service)的原子性，不然会出现业务错误。
 - 数据库特性：A(原子性)C(一致性)I（隔离性）D（持久性）
-<img src = "../img/java/并发编程/picture/oracle保持数据一致性讲解.png">
+<img src = "/img/java/并发编程/picture/oracle保持数据一致性讲解.png">
 
 #### synchronized代码块及细节
 - Oracle写存储过程的时候，要加BEGIN和END才能处理EXCEPTION
-<img src="../img/java/并发编程/picture/BEGINEND存储过程.png">
+<img src="/img/java/并发编程/picture/BEGINEND存储过程.png">
 
 - 多线程有异常终止操作两种方式
   -  使用InterruptedException
@@ -115,6 +115,7 @@ synchronized ("常量锁")  //死循环，因为常量引用的是同一个地�
             }
         }
 ``` 
+
   - 锁对象改变的问题，当使用一个对象进行加锁的时候，要注意对象本身发生改变的时候，那么持有的锁就不同。如果“对象本身”不发生改变，那么依然是同步的，即使是对象的属性（例如User对象的name和age属性）发生了改变（属性改变不影响锁的同步）。如果对象本身改变了，则不是同步，其他线程就进入了。
 
 ```Java
@@ -137,16 +138,16 @@ public void method(){
 
 ### 2. Volatile关键字概念，线程优化执行流程，内部原理讲解
 - volatile概念：volatile关键字的主要作用是使变量在多个线程间可见。
-<img src = "../img/java/并发编程/picture/volatile关键字概念.png">
+<img src = "/img/java/并发编程/picture/volatile关键字概念.png">
 
 #### volatile关键字的非原子性
 - JDK1.5以后，对每个线程(Thread)做了一个优化,加了一块独立的内存运行空间，这一块独立内存空间存放主内存的一些引用，也就是当前线程引用的一些变量。线程使用的时候，直接从自身的独立内存空间取数据。所以下图中，while循环不会被终止（创建在子线程，改的值改的是主线程的isRunning的值，所以不会终止）。
-<img src = "../img/java/并发编程/picture/JDK1.5之后不在同一线程设置开关不会终止.png">
+<img src = "/img/java/并发编程/picture/JDK1.5之后不在同一线程设置开关不会终止.png">
 上图，如果想停止，解决办法
 ```Java
 private volatile boolean isRunning = true;
 ```
-<img src = "../img/java/并发编程/picture/volatile关键字线程执行流程图.png">
+<img src = "/img/java/并发编程/picture/volatile关键字线程执行流程图.png">
 
 - volatile虽然拥有多个线程的可见性，但是却不具备同步性（也就是原子性)（count++方法，每次叠加1000次，分10个线程执行，最后一个线程执行完毕最终值不是10000）。可以算是一个轻量级的synchronized,性能要比synchronized强很多，不会造成阻塞（在很多开源框架里，比如netty的底层代码就大量使用volatile，可见netty性能一定是不错的）。这里需要注意：一般volatile用于只针对于多个线程可见的变量操作，并不能代替synchronized的同步功能。如果保证原子性可以用AtomicInteger.
 
@@ -156,7 +157,7 @@ private static AtomicInteger count = new AtomicInter(0); //count初始化值0
 count.incrementAndGet();
 ```
 - volatile只具有可见性，没有原子性。要实现原子性建议使用atomic类的系列对象，支持原子性操作（注意atomic类只保证本身方法的原子性，并不保证多次操作的原子性）。
-<img src = "../img/java/并发编程/picture/atomic类一个方法调用多次不保证原子性.png">
+<img src = "/img/java/并发编程/picture/atomic类一个方法调用多次不保证原子性.png">
 
 #### 并发编程下的多线程间通信概念wait，notify，线程经典面试题
 - 使用wait/notify方法实现线程间通信。（这两个方法都是object的类的方法，换句话说java的所有的对象都提供了这两个方法）
@@ -233,7 +234,7 @@ Map<Object,Object> map = Collections.synchronizedMap(new HashMap<>());
   - ConcurrentHashMap
   - ConcurrentSkipListMap（支持并发排序功能，密闭ConcurrentHashMap）
 - ConcurrentHashMap内部使用段（Segment）来表示这些不同的部分，每个段其实就是一个小的HashTable，他们有自己的锁。只要多个修改操作发生在不同的段上，他们就可以并发进行。把一个整体分成了16个段（Segment）。也就是最高支持16个线程的并发修改操作。这也是在多线程场景时减少锁的粒度从而降低锁竞争的一种方案。并且代码中大多共享变量使用volatile关键字声明，目的是第一时间获取修改的内容，性能非常好。
-<img src = "../img/java/并发编程/picture/ConcurrentHashMap使用.png">
+<img src = "/img/java/并发编程/picture/ConcurrentHashMap使用.png">
 - Copy-On-Write简称COW，是一种用于程序设计中的优化策略。JDK里的COW容器有两种：CopyOnWriteArrayList和CopyOnWriteArraySet，COW容器非常有用，可以在非常多的并发场景中使用到。***适用于读多写少的操作。写多的情况建议使用ArrayList，Set加锁方式实现同步***
 - CopyOnWrite容器即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里刚添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行***并发地读***，而不需要加锁，因为当前容器不会添加任何元素。而且COW容器的写操作已经加锁，不会出现写操作数据不一致问题情况。CopyOnWrite也是一种读写分离的思想，读和写不同的容器。
 
@@ -244,13 +245,13 @@ Map<Object,Object> map = Collections.synchronizedMap(new HashMap<>());
   - add()和offer() 都是加入元素。（ConcurrentLinkQueue中，这两种方法没有任何区别）。
   - poll()和peek（） 都是取头元素节点，区别在于前者会删除元素，后者不会
 - BlockingQueue接口
-<img src = "../img/java/并发编程/picture/BlockingQueue接口.png"> 
-<img src = "../img/java/并发编程/picture/BlockingQueue接口重要方法.png"> 
+<img src = "/img/java/并发编程/picture/BlockingQueue接口.png"> 
+<img src = "/img/java/并发编程/picture/BlockingQueue接口重要方法.png"> 
 
   -  ArrayBlockingQueue:阻塞队列，有界队列，不能读写分离。（队列满了再添加会抛出Queue full异常）。适用于Queue大，有峰值的情况。
   -  LinkedBlockingQueue：阻塞队列，无界队列，能读写分离。适合Queue不大情况。
   -  SynchronousQueue：不允许添加任何元素（不可以add()和offer()，只有阻塞了add（）才不会报异常，如下图。这是因为不是往队列添加，而是直接丢给阻塞的线程处理）。适用于数据量少，即来即走的情况。
-  <img src = "../img/java/并发编程/picture/SynchronousQueue队列能使用add情况.png">
+  <img src = "/img/java/并发编程/picture/SynchronousQueue队列能使用add情况.png">
   
   -  DelayQueue：带有延迟时间的Queue，元素只有当其执行的延迟时间到了，才能从队列中获取到该元素。没有大小限制，使用场景，比如对缓存超时的数据进行移除，任务超时处理，空闲连接的关闭等等。(参考[UseDelayQueue](https://github.com/CentMeng/JavaFrameTest/blob/master/src/com/msj/sync/queue/UseDelayQueue.java))
   -  PriorityBlockingQueue：不遵循先进先出原则，遵循比较原则，优先级由传入的对象Compator对象决定，也就是传入队列的对象必须实现Comparable接口。（参考[UsePriorityBlockingQueue](https://github.com/CentMeng/JavaFrameTest/blob/master/src/com/msj/sync/queue/UsePriorityBlockingQueue.java)）<font color="#F00">循环输出并没有排序，只有每次take时候就排序，取出优先级最高的</font>。
@@ -261,18 +262,18 @@ Map<Object,Object> map = Collections.synchronizedMap(new HashMap<>());
 ### 4. 多线程的设计模式
 #### Future模式讲解，即异步加载(见[future](https://github.com/CentMeng/JavaFrameTest/tree/master/src/com/msj/sync/future) )
 - Future模式类似于商品订单。比如在网购时，当看中某一件商品时，就可以提交订单，当订单处理完成后，在家里等待商品送货上门即可。或者说更形象的我们发送Ajax请求的时候，页面是异步的进行后台处理，用户无须一直等待请求的结果，可以继续浏览或操作其他内容。
-<img src = "../img/java/并发编程/picture/Future模式.png">
+<img src = "/img/java/并发编程/picture/Future模式.png">
 
 #### Master-Worker模式(见[masterworker](https://github.com/CentMeng/JavaFrameTest/tree/master/src/com/msj/sync/masterworker))
 - ***并行计算，使用多线程对同一个对象进行队列操作，处理完出队***
 - Master-Worker模式是常用的并行计算模式。它的核心思想是系统由两类进程协作工作：Master进程和Worker进程。Master负责接收和分配任务，Worker负责处理子任务。当各个Worker子进程处理完成后，会将结果返回给Master，由Master做归纳和总结。其好处是能将一个大任务分解成若干个小任务，并行执行，从而提高系统的吞吐量。
-<img src = "../img/java/并发编程/picture/Master-Worker模式.png">
+<img src = "/img/java/并发编程/picture/Master-Worker模式.png">
 - Master-Worker开发引导图
-<img src = "../img/java/并发编程/picture/Master-Worker模式开发引导图.png">
+<img src = "/img/java/并发编程/picture/Master-Worker模式开发引导图.png">
 
 #### 生产者-消费者模式(见[productorconsumer](https://github.com/CentMeng/JavaFrameTest/tree/master/src/com/msj/sync/productorconsumer))
 - 生产者和消费者也是一个非常经典的多线程模式，我们在实际开发中应用非常广泛的思想概念。在生产-消费模式中，通常有两类线程，即若干个生产者的线程和若干个消费者的线程。生产者线程负责提交用户请求，消费者线程则负责具体处理生产者提交的任务，在生产者和消费者之间通过共享内存缓存区进行通信。
-<img src = "../img/java/并发编程/picture/生产者-消费者模式.png">
+<img src = "/img/java/并发编程/picture/生产者-消费者模式.png">
 
 ### 5. 线程池
 
@@ -293,7 +294,7 @@ public ThreadPoolExecutor(int corePoolSize,
                               ThreadFactory threadFactory,
                               RejectedExecutionHandler handler) 
 ```
-<img src = "../img/java/并发编程/picture/自定义线程池使用详解.png">
+<img src = "/img/java/并发编程/picture/自定义线程池使用详解.png">
 
 - 自定义拒绝策略：
   - 方案1：高峰期过程中，通过HttpUrlConnection创建一个请求，通过这个请求发回传数据方，告诉他一会再发（高峰期不建议这样使用，因为资源已经很紧张了，再发送请求的话也是占用资源的，不过使用HttpClient可以配置请求的线程池数）。
@@ -323,14 +324,15 @@ Future模式非常适合处理耗时很长的业务逻辑时进行使用，可�
 
 - 信号量
 信号量可以用来解决限流（控制系统流量）。拿到信号量的线程可以进入，否则就等待。示例见：[UseSemaphore](https://github.com/CentMeng/JavaFrameTest/blob/master/src/com/msj/sync/executors/test3/UseSemaphore.java)。一般使用Redis进行限流，比如用将用户信息放到Redis缓存里，然后记录用户访问的url，加入1分钟只允许访问60次，如果超过60次提示访问频繁。
-<img src = "../img/java/并发编程/picture/信号量.png">
+<img src = "/img/java/并发编程/picture/信号量.png">
 - 解决高并发
   - 网络端
   - 服务器层面（ngix负载均衡（ngix最大只支持2000万并发，超过2000万可以通过ngix结合使用lvs或者haprox来进行负载均衡）->多个tomcat分流）
-<img src = "../img/java/并发编程/picture/ngix超过2000万并发解决方案.png">
+<img src = "/img/java/并发编程/picture/ngix超过2000万并发解决方案.png">
   - 业务（业务模块化，在业务上进行并发分流，细粒度）
-<img src = "../img/java/并发编程/picture/业务模块化并发分流策略.png">
+<img src = "/img/java/并发编程/picture/业务模块化并发分流策略.png">
   - Java层面限流
+  - 采用非关系型数据库对关系型数据库降压
 - 峰值计算，进行多轮压力测试后，采用80/20原则，即80%的访问请求在20%的时间内达到。
 
 ```
@@ -361,7 +363,7 @@ Lock lock = new ReentranLock(boolean fair);
 - 公平锁是哪个线程代码先调用则锁放开后调用哪个线程
 
 - 公平锁浪费性能
-<img src = "../img/java/并发编程/picture/Lock,Condition其他方法.png">
+<img src = "/img/java/并发编程/picture/Lock,Condition其他方法.png">
 
 #### ReentrantReadWriteLock读写锁
 - 实现读写分离的锁。在高并发的情况下，尤其是读多写少的情况下，性能要远高于重入锁。示例：[ReentrantReadWriteLock](https://github.com/CentMeng/JavaFrameTest/blob/master/src/com/msj/sync/lock/lock2/UseReentrantReadWriteLock.java)
@@ -404,11 +406,11 @@ Lock lock = new ReentranLock(boolean fair);
 
 #### 	Disruptor印象
 -  把一个个生产的对象（生产一堆）传到Disruptor中的RingBuffer容器中（环形结构），消费者在RingBuffer中注册监听事件，然后RingBuffer一旦有数据就会主动把生产对象传给消费者处理。
-<img src = "../img/java/并发编程/picture/Disruptor印象.png">   
+<img src = "/img/java/并发编程/picture/Disruptor印象.png">   
 - 理解RingBuffer
   -  RingBuffer是一个环，可以把他用做在上下文（线程）间传递数据的buffer。大小必须是2的n次方，否则影响性能（个数是2的n次方更有利于基于二进制的计算机进行计算）。
   -  基本来说，ringbuffer拥有一个序号（Sequence），这个序号指向数组中下一个可用元素。随着你不停地填充这个buffer（可能也会有相应的读取），这个序号会一直增长，直到绕过这个环。
-<img src = "../img/java/并发编程/picture/ringbuffer讲解.png">
+<img src = "/img/java/并发编程/picture/ringbuffer讲解.png">
   -  要找到数组中当前序号指向的元素，可以通过mod操作：sequence mod array length = array index（取模操作）以上面的ringbuffer为例（java的mod语法）：12 % 10 = 2。
   -  如果你看了维基百科里面的关于环形buffer的词条，你就会发现，我们的实现方式，与其最大的区别在于：没有尾指针。我们只维护了一个指向下一个可用位置的序号。这种实现是经过深思熟虑的—我们选择用环形buffer的最初原因就是想要提供可靠的消息传递。
   -  我们实现的ring buffer和大家常用的队列之间的区别是，我们不删除buffer中的数据，也就是说这些数据一直存放在buffer中，直到新的数据覆盖他们。这就是和维基百科版本相比，我们不需要尾指针的原因。ringbuffer本身并不控制是否需要重叠。
