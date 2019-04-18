@@ -35,7 +35,7 @@ proxy_next_upstream_tries配置决定最多重试多少次，0表示不限制。
 
 好了，下面看下破案现场吧
 
-<img src="/img/ken/nginxretry.jpeg" />
+<img src="/img/java/ken/nginxretry.jpeg" />
 
 可以看到超时时间是60秒，超时之后，都会向之前没有重试过的服务器再次请求。
 
