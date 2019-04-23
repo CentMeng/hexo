@@ -4,11 +4,12 @@
 
 # Site
 title: 萤火
-subtitle: 
-description: 远方除了遥远一无所有
+subtitle: 远方除了遥远一无所有
+description: 不昧己心，不尽人情，不竭物力  看人长处，帮人难处，记人好处
 author: Vincent.M
 language: zh-Hans
 email: mengshaojie@188.com
+# keywords:孟少杰,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Java,大数据
 timezone:
 
 # URL
@@ -101,7 +102,7 @@ jsonContent:
       link: false
       permalink: false
       excerpt: false
-      categories: false
+      categories: true
       tags: true
 
 

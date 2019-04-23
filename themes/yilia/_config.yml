@@ -99,6 +99,27 @@ reward_type: 2
 # 打赏wording
 reward_wording: '谢谢您请我吃糖果'
 # 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
-alipay: http://obbbnmuwc.bkt.clouddn.com/zhifubao.png
+alipay: /img/zhifubao.png
 # 微信二维码图片地址
-weixin: http://obbbnmuwc.bkt.clouddn.com/weixin.png
+weixin: /img/weixin.png
+
+duoshuo_shortname: CentMeng
+
+jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: true
+      tags: true
