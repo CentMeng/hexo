@@ -1,15 +1,15 @@
 # Header
 menu:
-  打不开网页在链接地址前加https://: /
+  # 打不开网页在链接地址前加https://: /
   主页: /
-  随笔集: /categories/随笔集
-  大数据: /categories/大数据技术
-  后端技术: /categories/后端技术
-  Android: /categories/Android技术
-  前端技术: /categories/前端技术
-  数据库: /categories/数据库
-  进阶: /categories/进阶
-  其他: /categories/其他
+  # 随笔集: /categories/随笔集
+  # 大数据: /categories/大数据技术
+  # 后端技术: /categories/后端技术
+  # Android: /categories/Android技术
+  # 前端技术: /categories/前端技术
+  # 数据库: /categories/数据库
+  # 进阶: /categories/进阶
+  # 其他: /categories/其他
 
 # SubNav
 subnav:
