@@ -12,7 +12,17 @@ function init() {
 	if (yiliaConfig && yiliaConfig.open_in_new) {
 		let $a = document.querySelectorAll(('.article-entry a:not(.article-more-a)'))
 		$a.forEach(($em) => {
-			$em.setAttribute('target', '_blank')
+			let target = $em.getAttribute('target');
+			if (!target || target === '') {
+				$em.setAttribute('target', '_blank');
+			}
+		})
+	}
+	// 目录序号
+	if (yiliaConfig && yiliaConfig.toc_hide_index) {
+		let $a = document.querySelectorAll(('.toc-number'))
+		$a.forEach(($em) => {
+			$em.style.display = 'none';
 		})
 	}
 
@@ -21,6 +31,7 @@ function init() {
 	if ($aboutme && $aboutme.length !== 0) {
 		$aboutme.innerHTML = $aboutme.innerText
 	}
+	
 }
 
 module.exports = {
